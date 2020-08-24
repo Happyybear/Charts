@@ -36,7 +36,7 @@ open class XAxisRendererRadarChart: XAxisRenderer
         }
         
         let labelFont = xAxis.labelFont
-        let labelTextColor = xAxis.labelTextColor
+
         let labelRotationAngleRadians = xAxis.labelRotationAngle.RAD2DEG
         let drawLabelAnchor = CGPoint(x: 0.5, y: 0.25)
         
@@ -52,6 +52,9 @@ open class XAxisRendererRadarChart: XAxisRenderer
             
             let label = xAxis.valueFormatter?.stringForValue(Double(i), axis: xAxis) ?? ""
             
+            /// 获取每个xLabel的 颜色
+            let mlabelTextColor = xAxis.labelTextColor
+            
             let angle = (sliceangle * CGFloat(i) + chart.rotationAngle).truncatingRemainder(dividingBy: 360.0)
             
             let p = center.moving(distance: CGFloat(chart.yRange) * factor + xAxis.labelRotatedWidth / 2.0, atAngle: angle)
@@ -60,7 +63,7 @@ open class XAxisRendererRadarChart: XAxisRenderer
                       formattedLabel: label,
                       x: p.x,
                       y: p.y - xAxis.labelRotatedHeight / 2.0,
-                      attributes: [NSAttributedString.Key.font: labelFont, NSAttributedString.Key.foregroundColor: labelTextColor],
+                      attributes: [NSAttributedString.Key.font: labelFont, NSAttributedString.Key.foregroundColor: mlabelTextColor],
                       anchor: drawLabelAnchor,
                       angleRadians: labelRotationAngleRadians)
         }
