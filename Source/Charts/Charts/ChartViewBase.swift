@@ -46,7 +46,7 @@ public protocol ChartViewDelegate
     // Callbacks when Animator stops animating
     @objc optional func chartView(_ chartView: ChartViewBase, animatorDidStop animator: Animator)
     
-    @objc optional func chartMarkerSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight)
+    @objc optional func chartMarkerSelected(_ chartView: ChartViewBase)
 }
 
 open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
@@ -550,7 +550,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         if callDelegate, let delegate = delegate
         {
             if self.clickMarker == true{
-                delegate.chartMarkerSelected?(self, entry: entry!, highlight: h!)
+                delegate.chartMarkerSelected?(self)
             }else if let h = h
             {
                 // notify the listener
