@@ -222,13 +222,13 @@ open class RadarChartView: PieRadarChartViewBase
     @objc open var yRange: Double { return _yAxis.axisRange }
     
     open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        self.clickMarker = false
         if marker != nil && self.markPos != nil {
             let view = marker as! MarkerView
             let rect = view.frame;
             let newRect = CGRect.init(x: self.markPos!.x + view.offset.x, y: self.markPos!.y + view.offset.y, width: rect.width, height: rect.height)
-
             if newRect.contains(point) && !view.isHidden{
-                return view;
+                self.clickMarker = true
             }
         }
         return super.hitTest(point, with: event)

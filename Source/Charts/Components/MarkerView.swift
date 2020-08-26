@@ -96,5 +96,4 @@ open class MarkerView: NSUIView, IMarker
         return nil
         #endif
     }
-    
 }
