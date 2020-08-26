@@ -35,6 +35,8 @@ open class RadarChartView: PieRadarChartViewBase
     /// flag indicating if the web lines should be drawn or not
     @objc open var drawWeb = true
     
+    
+    
     /// modulus that determines how many labels and web-lines are skipped before the next is drawn
     private var _skipWebLineCount = 0
     
@@ -218,4 +220,18 @@ open class RadarChartView: PieRadarChartViewBase
     
     /// The range of y-values this chart can display.
     @objc open var yRange: Double { return _yAxis.axisRange }
+    
+    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if marker != nil && self.markPos != nil {
+            let view = marker as! MarkerView
+            let rect = view.frame;
+            let newRect = CGRect.init(x: self.markPos!.x + view.offset.x, y: self.markPos!.y + view.offset.y, width: rect.width, height: rect.height)
+
+            if newRect.contains(point) && !view.isHidden{
+                return view;
+            }
+        }
+        return super.hitTest(point, with: event)
+    }
+    
 }

@@ -147,6 +147,8 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     /// An extra offset to be appended to the viewport's left
     @objc open var extraLeftOffset: CGFloat = 0.0
     
+    open var markPos: CGPoint?
+    
     @objc open func setExtraOffsets(left: CGFloat, top: CGFloat, right: CGFloat, bottom: CGFloat)
     {
         extraLeftOffset = left
@@ -585,7 +587,9 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
             let marker = marker
             , isDrawMarkersEnabled &&
                 valuesToHighlight()
-            else { return }
+            else {
+                self.markPos = nil
+                return }
         
         for i in 0 ..< _indicesToHighlight.count
         {
@@ -614,6 +618,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
             marker.refreshContent(entry: e, highlight: highlight)
             
             // draw the marker
+            self.markPos = pos;
             marker.draw(context: context, point: pos)
         }
     }
