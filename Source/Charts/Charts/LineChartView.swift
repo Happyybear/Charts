@@ -18,8 +18,9 @@ open class LineChartView: BarLineChartViewBase, LineChartDataProvider
     internal override func initialize()
     {
         super.initialize()
-        
-        renderer = LineChartRenderer(dataProvider: self, animator: _animator, viewPortHandler: _viewPortHandler)
+        //修改yc  2020/9/1
+//        LineChartRenderer
+        renderer = KBreakLineRadarRenderer(dataProvider: self, animator: _animator, viewPortHandler: _viewPortHandler)
     }
     
     // MARK: - LineChartDataProvider
