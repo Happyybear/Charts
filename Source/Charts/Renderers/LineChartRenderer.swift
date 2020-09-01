@@ -320,6 +320,8 @@ open class LineChartRenderer: LineRadarRenderer
             var e: ChartDataEntry! = dataSet.entryForIndex(j)
             
             if e == nil { continue }
+            //修改yc  2020/9/1
+            if e.y.isNaN { continue }
             
             _lineSegments[0].x = CGFloat(e.x)
             _lineSegments[0].y = CGFloat(e.y * phaseY)
