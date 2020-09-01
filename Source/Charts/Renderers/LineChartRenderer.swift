@@ -321,7 +321,7 @@ open class LineChartRenderer: LineRadarRenderer
             
             if e == nil { continue }
             //修改yc  2020/9/1
-            if e.y.isNaN { continue }
+            if !e.visible { continue }
             
             _lineSegments[0].x = CGFloat(e.x)
             _lineSegments[0].y = CGFloat(e.y * phaseY)
